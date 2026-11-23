@@ -4,3 +4,5 @@
 ✓ Ready in 525ms
 ✓ Running next.config.ts took 58ms
 
+ GET / 200 in 381ms (next.js: 153ms, application-code: 227ms)
+ GET /api/settings?XTransformPort=3001 404 in 283ms (next.js: 251ms, application-code: 32ms)
