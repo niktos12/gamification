@@ -1,0 +1,681 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+  --font-display: var(--font-manrope);
+  --font-dot: var(--font-doto);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-coin: var(--coin);
+  --color-lilac: var(--lilac);
+  --color-iris: var(--iris);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ==========================================================================
+   Vercel x Nothing x Glassmorphism design system
+   — pure black canvas, hairline borders, frosted glass panels,
+     dot-matrix decorations and a single electric-violet accent (#a855f7).
+   ========================================================================== */
+:root {
+  --radius: 0.75rem;
+
+  /* Legacy alias tokens: pages reference iris/lilac, now they resolve
+     to the monochrome palette. Coin stays gold — it's the in-game currency. */
+  --iris: #d4d4d4;
+  --lilac: #ffffff;
+  --coin: #f5b52e;
+
+  /* Electric violet — the only true color of the interface. */
+  --violet: #a855f7;
+  --violet-soft: #c084fc;
+
+  --background: #050505;
+  --foreground: #fafafa;
+
+  --card: rgba(255, 255, 255, 0.03);
+  --card-foreground: #fafafa;
+
+  --popover: #0b0b0b;
+  --popover-foreground: #fafafa;
+
+  --primary: #ffffff;
+  --primary-foreground: #0a0a0a;
+
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: #fafafa;
+
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: #9d9d9d;
+
+  --accent: rgba(255, 255, 255, 0.07);
+  --accent-foreground: #fafafa;
+
+  --destructive: #ef4444;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: rgba(255, 255, 255, 0.35);
+
+  --chart-1: #ffffff;
+  --chart-2: #a3a3a3;
+  --chart-3: #525252;
+  --chart-4: #a855f7;
+  --chart-5: #f5b52e;
+
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent: rgba(255, 255, 255, 0.06);
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: rgba(255, 255, 255, 0.35);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    letter-spacing: -0.011em;
+  }
+  /* Текст никогда не обрезается: длинные слова переносятся целиком,
+     без «рваных» дефисов внутри слов. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li,
+  blockquote {
+    overflow-wrap: break-word;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--violet);
+    color: #fff;
+  }
+}
+
+/* Scrollbars ----------------------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
+  background-clip: content-box;
+}
+
+/* Fonts ------------------------------------------------------------------ */
+.font-display {
+  font-family: var(--font-manrope), var(--font-inter), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Dot-matrix display font (Nothing vibe) — latin glyphs & numerals. */
+.font-dot {
+  font-family: var(--font-doto), var(--font-manrope), system-ui, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* Extravagant display counterpart to the dot-matrix font —
+   wide techno grotesque with Cyrillic (pairs: Doto x Unbounded). */
+.font-unbounded {
+  font-family: var(--font-unbounded), var(--font-manrope), system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* White gradient for big numerals / accents. */
+.text-gradient {
+  background: linear-gradient(95deg, #ffffff 0%, #d4d4d4 48%, #737373 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Silver gradient for display headlines (KIUTA-like softness). */
+.title-gradient {
+  background: linear-gradient(104deg, #ffffff 4%, #dadade 52%, #8e8e96 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Scroll hint — тонкая вертикальная линия с бегущей фиолетовой точкой. */
+@keyframes scroll-dot {
+  0% {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(46px);
+    opacity: 0;
+  }
+}
+.scroll-line {
+  position: relative;
+  width: 1px;
+  height: 48px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.16);
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 12px;
+  background: var(--violet);
+  animation: scroll-dot 2.4s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-line::after {
+    animation: none;
+  }
+}
+
+/* Outlined display text (Vercel/Nothing headline style). */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.55);
+  color: transparent;
+}
+
+/* Heavier outline for the wide Unbounded display font. */
+.text-outline-heavy {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.66);
+  color: transparent;
+  paint-order: stroke fill;
+}
+.text-outline-faint {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.28);
+  color: transparent;
+}
+
+/* Glass panels ------------------------------------------------------------
+   Тёмная «подложка» + blur: фоновые паттерны за панелями гаснут и
+   размываются — декор больше не просвечивает сквозь текст и карточки. */
+.panel {
+  border-radius: calc(var(--radius) + 6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.014) 60%, rgba(255, 255, 255, 0.025) 100%),
+    rgba(10, 10, 10, 0.62);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05) inset, 0 20px 50px -30px rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+}
+
+.panel-hover {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s, box-shadow 0.35s;
+}
+.panel-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.07) inset,
+    0 24px 60px -28px rgba(0, 0, 0, 0.95),
+    0 0 44px -18px rgba(255, 255, 255, 0.14);
+}
+
+/* Hero glass card ---------------------------------------------------------- */
+.glass-card {
+  border-radius: calc(var(--radius) + 10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.025) 50%, rgba(255, 255, 255, 0.05) 100%),
+    rgba(8, 8, 8, 0.66);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.12) inset,
+    0 40px 80px -30px rgba(0, 0, 0, 0.95),
+    0 0 70px -30px rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+/* Patterns ------------------------------------------------------------------ */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.13) 1.1px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.line-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 78%);
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Micro-labels above section titles (Nothing mono style) -------------------- */
+.eyebrow {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* Giant section numerals rendered in the dot-matrix font --------------------- */
+.ghost-num {
+  font-family: var(--font-doto), var(--font-manrope), system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(68px, 10vw, 136px);
+  line-height: 0.82;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.13);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* White highlight pill on the key hero word (Vercel-style) -------------------- */
+.hl-pill {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.02em 0.3em;
+  border-radius: 0.22em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  box-shadow: 0 12px 34px -14px rgba(255, 255, 255, 0.5);
+}
+
+/* Violet pulsing status dot ------------------------------------------------------ */
+.rec-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--violet);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.9);
+  flex-shrink: 0;
+}
+.rec-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  animation: rec-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes rec-ping {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  80%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* Diagonal hatching (rich background filler) ---------------------------------- */
+.stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.07) 0 1px,
+    transparent 1px 13px
+  );
+}
+
+/* "+" cross-mark field (technical Nothing HUD filler) ---------------------------- */
+.plus-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 10.5v7M10.5 14h7' stroke='rgba(255,255,255,0.20)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+}
+.plus-field-violet {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 10.5v7M10.5 14h7' stroke='rgba(168,85,247,0.38)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+}
+
+/* Four-point star field (scattered sparkles tile) -------------------------------- */
+.star-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M20 8c.9 6.9 4.6 10.6 11.5 11.5C24.6 20.4 20.9 24.1 20 31c-.9-6.9-4.6-10.6-11.5-11.5C15.4 18.6 19.1 14.9 20 8Z' fill='rgba(255,255,255,0.14)'/%3E%3Cpath d='M86 62c.6 4.6 3.1 7.1 7.7 7.7-4.6.6-7.1 3.1-7.7 7.7-.6-4.6-3.1-7.1-7.7-7.7 4.6-.6 7.1-3.1 7.7-7.7Z' fill='rgba(168,85,247,0.30)'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+/* Faint checker tiles ------------------------------------------------------------ */
+.check-field {
+  background-image: conic-gradient(
+    rgba(255, 255, 255, 0.05) 0 25%,
+    transparent 0 50%,
+    rgba(255, 255, 255, 0.05) 0 75%,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
+/* Concentric ring set (radar / sonar filler) -------------------------------------- */
+.ring-set {
+  background-image: repeating-radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.09) 0 1px,
+    transparent 1px 54px
+  );
+}
+
+/* Larger dot matrix --------------------------------------------------------------- */
+.dot-grid-lg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.11) 1.4px, transparent 1.5px);
+  background-size: 36px 36px;
+}
+
+/* Violet dot matrix ------------------------------------------------------------ */
+.dot-grid-violet {
+  background-image: radial-gradient(circle, rgba(168, 85, 247, 0.34) 1.1px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Halftone fade (dense dots for collage patches) ------------------------------------- */
+.halftone-fade {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.17) 1px, transparent 1.3px);
+  background-size: 13px 13px;
+}
+
+/* Diagonal speed lines (Persona collage energy) --------------------------------------- */
+.speed-lines {
+  background-image: repeating-linear-gradient(
+    -24deg,
+    rgba(255, 255, 255, 0.08) 0 1px,
+    transparent 1px 22px
+  );
+}
+
+/* White/violet hazard tape — collage scrap -------------------------------------------- */
+.tape {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.92) 0 6px,
+    rgba(168, 85, 247, 0.92) 6px 12px
+  );
+}
+
+/* Technical micro-labels scattered over the background (HUD flavour) ------------------- */
+.tech-label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.34);
+  white-space: nowrap;
+}
+
+/* Style plates: белая/фиолетовая плашка с жёсткой офсетной тенью ------------------- */
+.p-plate {
+  display: inline-block;
+  background: #ffffff;
+  color: #0a0a0a;
+  border-radius: 0.14em;
+  box-shadow: 0.07em 0.1em 0 0 rgba(168, 85, 247, 0.95);
+  font-weight: 800;
+}
+.p-plate-violet {
+  background: var(--violet);
+  color: #ffffff;
+  box-shadow: 0.07em 0.1em 0 0 rgba(255, 255, 255, 0.85);
+}
+.p-chip-glass {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0.14em;
+  box-shadow: 0.07em 0.1em 0 0 rgba(255, 255, 255, 0.16);
+}
+
+/* Spotlight-follow glow (interactive cards) ---------------------------------------------- */
+.spot-card {
+  --sx: 50%;
+  --sy: 40%;
+}
+.spot-target {
+  position: relative;
+}
+.spot-target::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(240px circle at var(--sx) var(--sy), rgba(255, 255, 255, 0.12), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.spot-card:hover .spot-target::after {
+  opacity: 1;
+}
+
+/* Pause marquee on hover (interactive ticker) ---------------------------------------------- */
+.marquee-hover:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Giant watermark word (hero bottom, dot-matrix) ---------------------------------- */
+.hero-watermark {
+  font-family: var(--font-doto), var(--font-manrope), system-ui, sans-serif;
+  font-weight: 900;
+  /* 17vw держит слово целиком в строке даже на узких экранах. */
+  font-size: clamp(64px, 17vw, 280px);
+  line-height: 0.78;
+  letter-spacing: 0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.13);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Section surface band — distinct bg block for a whole section --------------------- */
+.band {
+  border-radius: calc(var(--radius) + 16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.012) 100%),
+    rgba(9, 9, 9, 0.66);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 30px 70px -40px rgba(0, 0, 0, 0.95);
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Ghost numeral, violet variant ------------------------------------------------ */
+.ghost-num-violet {
+  color: rgba(168, 85, 247, 0.4);
+}
+
+/* Perspective grid floor (final CTA / footer) ---------------------------------- */
+.grid-floor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.11) 1px, transparent 1px);
+  background-size: 44px 44px;
+  transform: perspective(620px) rotateX(58deg) scale(1.7);
+  transform-origin: 50% 0%;
+  mask-image: linear-gradient(to bottom, transparent 4%, black 45%, black 82%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 4%, black 45%, black 82%, transparent);
+  opacity: 0.55;
+}
+
+/* Hex badge shape --------------------------------------------------------------- */
+.hex-clip {
+  clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+}
+
+/* Corner brackets decor ---------------------------------------------------------- */
+.corner-bracket {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(255, 255, 255, 0.45);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+}
+
+/* Marquee ------------------------------------------------------------------------- */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee-x 36s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Glows ---------------------------------------------------------------------------- */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 7s ease-in-out infinite;
+}
+
+/* Sparkle twinkle -------------------------------------------------------------------- */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.82) rotate(-6deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08) rotate(10deg);
+  }
+}
+.animate-twinkle {
+  animation: twinkle 4.5s ease-in-out infinite;
+}
+
+/* Slow rotation for dashed rings / radial decor ---------------------------------------- */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slower {
+  animation: spin-slow 28s linear infinite;
+}
+.animate-spin-reverse {
+  animation: spin-slow 40s linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slower,
+  .animate-spin-reverse {
+    animation: none;
+  }
+}
+
+/* Wheel ------------------------------------------------------------------------------- */
+.wheel-spin {
+  transition: transform 4.4s cubic-bezier(0.12, 0.68, 0.08, 1);
+}
+
+/* Timer digits -------------------------------------------------------------------------- */
+.tabular-nums-tight {
+  font-variant-numeric: tabular-nums;
+}
