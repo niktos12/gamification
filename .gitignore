@@ -11,7 +11,8 @@ node_modules
 /coverage
 
 # next.js
-/.next/
+
+.next
 /out/
 
 # production
@@ -29,7 +30,6 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-
 # vercel
 .vercel
 
